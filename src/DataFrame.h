@@ -10,9 +10,9 @@ class DataFrame {
     public:
       DataFrame(std::string filename);
       DataFrame() {}
-      std::vector<Course> getCoursesByInstructor(std::string professorName);  
-      std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit);
-      double getSectionGPA(Section section);
+      std::vector<Course> getCoursesByInstructor(std::string professorName) const;  
+      std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;
+      double getSectionGPA(Section section) const;
     private:
       std::unordered_map<std::string,std::vector<Course>> instructorCourseMap;
       std::unordered_map<Section, std::vector<Course>> sectionMap;

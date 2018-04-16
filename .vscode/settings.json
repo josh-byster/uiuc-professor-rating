@@ -9,6 +9,9 @@
         "stdexcept": "cpp",
         "typeinfo": "cpp",
         "istream": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__split_buffer": "cpp",
+        "string": "cpp",
+        "vector": "cpp"
     }
 }
