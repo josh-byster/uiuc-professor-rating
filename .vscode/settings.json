@@ -8,6 +8,7 @@
         "new": "cpp",
         "stdexcept": "cpp",
         "typeinfo": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "algorithm": "cpp"
     }
 }

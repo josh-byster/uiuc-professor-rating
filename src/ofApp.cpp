@@ -11,7 +11,7 @@ void ofApp::setup(){
     searchResults = searchGui->addDropdown("Hi",options);  
     searchResults->setVisible(false);
     searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
-    DataFrame df(FILE_PATH);
+    dataframe = DataFrame(FILE_PATH);
 
 }
 
@@ -23,6 +23,12 @@ void ofApp::update(){
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
 {
     cout << "the input field changed to: " << e.text << endl;
+    std::vector<std::string> matches = dataframe.getProfessorMatchesByName(e.text, 5);
+    
+    // cannot delete or change dropdown object options in ofxDatGui, so we 
+    // must instead hide the layer
+    searchResults->setVisible(false);
+    searchResults = searchGui->addDropdown("Results",matches);
     searchResults->setVisible(true);
     
 
@@ -31,6 +37,7 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
 {
     cout << "the option at index # " << e.child << " was selected " << endl;
+    //layoutGui();
 }
 
 //--------------------------------------------------------------

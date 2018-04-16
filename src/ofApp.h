@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
 		ofxDatGui* searchGui;
 		ofxDatGuiTextInput* searchInput;
 		ofxDatGuiDropdown* searchResults;
-
+		DataFrame dataframe;
 		void onTextInputEvent(ofxDatGuiTextInputEvent e);
 		void onDropdownEvent(ofxDatGuiDropdownEvent e);
 };
