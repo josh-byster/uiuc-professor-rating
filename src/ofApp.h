@@ -4,6 +4,7 @@
 #include "ofxDatGui.h"
 #include "CSVReader.h"
 #include "Constants.h"
+#include "DataFrame.h"
 class ofApp : public ofBaseApp{
 
 	public:

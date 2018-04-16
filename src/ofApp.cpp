@@ -11,8 +11,8 @@ void ofApp::setup(){
     searchResults = searchGui->addDropdown("Hi",options);  
     searchResults->setVisible(false);
     searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
-    CSVReader reader(FILE_PATH);
-    reader.getData();
+    DataFrame df(FILE_PATH);
+
 }
 
 //--------------------------------------------------------------

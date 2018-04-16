@@ -28,7 +28,7 @@ namespace std {
       using std::hash;
       using std::string;
 
-      return (hash<int>()(value.year) + hash<string>()(value.term) + hash<int>()(value.courseNumber));
+      return (hash<int>()(value.year) + hash<string>()(value.term) + hash<int>()(value.courseNumber) + hash<string>()(value.subject));
     }
   };
 

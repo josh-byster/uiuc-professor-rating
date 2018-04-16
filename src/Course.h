@@ -4,14 +4,8 @@
 #include <vector>
 #include <iostream>
 #include "Section.h"
-class Course {
-
-    public:
+struct Course {
         Course(std::string row);
-        unsigned int getYear();
-        std::string getTerm();
-        std::string getSubject();
-    private:
         Section section;
         std::string courseTitle;
         std::vector<int> gradesGiven;
