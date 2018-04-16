@@ -28,8 +28,9 @@ std::vector<Course> DataFrame::getCoursesByInstructor(std::string professorName)
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit){
     std::vector<std::string> matches;
     for(std::string instructor : instructorNames){
-        std::transform(instructor.begin(),instructor.end(),instructor.begin(),::tolower);
-        if(instructor.find(professorName) != std::string::npos){
+        std::string instructorLowercase(instructor.size(),'x');
+        std::transform(instructor.begin(),instructor.end(),instructorLowercase.begin(),::tolower);
+        if(instructorLowercase.find(professorName) != std::string::npos){
             matches.push_back(instructor);
             if(matches.size() == limit){
                 return matches;

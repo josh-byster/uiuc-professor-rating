@@ -6,11 +6,8 @@ void ofApp::setup(){
     searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
     searchInput = searchGui->addTextInput("Last Name:", "Fagen-Ulmschneider");
     searchInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
+    searchResults = nullptr;
 
-    vector<string> options = {"ONE", "TWO", "THREE", "FOUR"};
-    searchResults = searchGui->addDropdown("Hi",options);  
-    searchResults->setVisible(false);
-    searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
     dataframe = DataFrame(FILE_PATH);
 
 }
@@ -27,17 +24,21 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
     
     // cannot delete or change dropdown object options in ofxDatGui, so we 
     // must instead hide the layer
-    searchResults->setVisible(false);
+    if(searchResults != nullptr){
+        searchResults->setVisible(false);
+    }
     searchResults = searchGui->addDropdown("Results",matches);
     searchResults->setVisible(true);
-    
+    searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
 
 }
 
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
 {
     cout << "the option at index # " << e.child << " was selected " << endl;
+    ofxDatGuiDropdownOption* selectedOption = searchResults->getChildAt(e.child);
     //layoutGui();
+    std::cout<<selectedOption->getLabel()<<std::endl;
 }
 
 //--------------------------------------------------------------
