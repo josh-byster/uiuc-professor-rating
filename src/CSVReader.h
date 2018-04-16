@@ -7,8 +7,8 @@ class CSVReader {
     
     public:
         CSVReader(std::string filename) : filename(filename) { };
-
+        std::vector<std::vector<std::string>> getData();
     private:
         std::string filename;
-        std::vector<std::vector<std::string>> getData();
+        
 };

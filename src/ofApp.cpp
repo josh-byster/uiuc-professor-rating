@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
     searchInput = searchGui->addTextInput("Last Name:", "Fagen-Ulmschneider");
     searchInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
@@ -10,6 +11,8 @@ void ofApp::setup(){
     searchResults = searchGui->addDropdown("Hi",options);  
     searchResults->setVisible(false);
     searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
+    CSVReader reader(FILE_PATH);
+    reader.getData();
 }
 
 //--------------------------------------------------------------

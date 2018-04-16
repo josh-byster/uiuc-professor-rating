@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxDatGui.h"
 #include "CSVReader.h"
+#include "Constants.h"
 class ofApp : public ofBaseApp{
 
 	public:
