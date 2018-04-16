@@ -2,6 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofxDatGui* gui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
+    ofxDatGuiTextInput* myInput = gui->addTextInput("Name:", "Stephen");
+    vector<string> options = {"ONE", "TWO", "THREE", "FOUR"};
+    
+    gui->addDropdown("Hi",options);  
+    myInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
 }
 
 //--------------------------------------------------------------
@@ -9,6 +15,10 @@ void ofApp::update(){
 
 }
 
+void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
+{
+    cout << "the input field changed to: " << e.text << endl;
+}
 //--------------------------------------------------------------
 void ofApp::draw(){
 
@@ -16,9 +26,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(key == 'h'){
-        string presetName = ofSystemTextBoxDialog("Professor name:");
-    }
 }
 
 //--------------------------------------------------------------
