@@ -1,4 +1,6 @@
 #include "DataFrame.h"
+
+
 DataFrame::DataFrame(std::string filename){
     CSVReader reader(filename);
     std::vector<Course> courseData = reader.getData();
@@ -26,7 +28,8 @@ std::vector<Course> DataFrame::getCoursesByInstructor(std::string professorName)
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit){
     std::vector<std::string> matches;
     for(std::string instructor : instructorNames){
-        if(instructor.substr(0,professorName.length()) == professorName){
+        std::transform(instructor.begin(),instructor.end(),instructor.begin(),::tolower);
+        if(instructor.find(professorName) != std::string::npos){
             matches.push_back(instructor);
             if(matches.size() == limit){
                 return matches;

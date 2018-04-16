@@ -2,6 +2,7 @@
 #define DATAFRAME_H
 #include <vector>
 #include <unordered_set>
+#include <algorithm>
 #include "Course.h"
 #include "CSVReader.h"
 #include <unordered_map>
