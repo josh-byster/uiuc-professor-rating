@@ -38,3 +38,15 @@ std::string Course::getNextItemInLine(std::string& row){
     }
     return item;
 }
+
+double Course::getGPA(){
+    double qualityPoints = 0;
+    int studentCount = 0;
+
+    for(int i = 0; i < 13; i++){
+        qualityPoints+= GRADES_TO_GPA[i] * gradesGiven[i];
+        studentCount += gradesGiven[i];
+    }
+
+    return qualityPoints / studentCount;
+}

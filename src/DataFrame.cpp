@@ -15,6 +15,6 @@ DataFrame::DataFrame(std::string filename){
     std::cout<<"TRYing hash: "<<std::hash<Section>()(Section(2017, "Fall", "MATH", 241))<<std::endl;
     std::vector<Course> testData = sectionMap[Section(2017, "Fall", "MATH", 241)];
     for(Course c : testData){
-        std::cout<<c.instructorName<<std::endl;
+        std::cout<<c.instructorName<<" GPA: "<<c.getGPA()<<std::endl;
     } 
 }
