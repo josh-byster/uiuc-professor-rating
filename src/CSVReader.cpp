@@ -1,7 +1,6 @@
 #include "CSVReader.h"
 #include <fstream>
 #include <iostream>
-#include "Course.h"
 #include <algorithm>
 #include "Constants.h"
 std::vector<Course> CSVReader::getData() {
@@ -15,14 +14,14 @@ std::vector<Course> CSVReader::getData() {
         // iterate once because the headers are in the first line
         getline(file,line);
         while(getline(file,line)){
-            std::cout<<std::count(line.begin(), line.end(), ',')<<std::endl;
+            // some lines are incomplete, and they thus have less commas. So we should exclude them.
             if(std::count(line.begin(), line.end(), ',') == NUM_COMMAS){
                 courses.push_back(Course(line));
             }
         }
     }
     
-
+    std::cout<<courses.size()<< " courses loaded from file."<<std::endl;
     return courses;
     
 }

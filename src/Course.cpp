@@ -14,7 +14,6 @@ Course::Course(std::string row){
     }
 
     instructorName = getNextItemInLine(row);
-    std::cout<<instructorName<<std::endl;
 
 }
 
@@ -24,7 +23,6 @@ std::string Course::getNextItemInLine(std::string& row){
         // we need to ignore commas since it's a string (instructor or course name) that may have commas
         row.erase(0,1);
         item = row.substr(0,row.find("\""));
-        std::cout<<item<<std::endl;
         row.erase(0,row.find("\"")+1);
         // we may need to remove an extra comma
         if(row.length() > 0 && row.at(0) == ','){
