@@ -2,12 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofxDatGui* gui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
-    ofxDatGuiTextInput* myInput = gui->addTextInput("Name:", "Stephen");
+    searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
+    searchInput = searchGui->addTextInput("Last Name:", "Fagen-Ulmschneider");
+    searchInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
+
     vector<string> options = {"ONE", "TWO", "THREE", "FOUR"};
-    
-    gui->addDropdown("Hi",options);  
-    myInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
+    searchResults = searchGui->addDropdown("Hi",options);  
+    searchResults->setVisible(false);
+    searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
 }
 
 //--------------------------------------------------------------
@@ -18,7 +20,16 @@ void ofApp::update(){
 void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
 {
     cout << "the input field changed to: " << e.text << endl;
+    searchResults->setVisible(true);
+    
+
 }
+
+void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
+{
+    cout << "the option at index # " << e.child << " was selected " << endl;
+}
+
 //--------------------------------------------------------------
 void ofApp::draw(){
 

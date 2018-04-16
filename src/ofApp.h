@@ -22,6 +22,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		void onTextInputEvent(ofxDatGuiTextInputEvent e);
 		
+		
+	private:
+		ofxDatGui* searchGui;
+		ofxDatGuiTextInput* searchInput;
+		ofxDatGuiDropdown* searchResults;
+
+		void onTextInputEvent(ofxDatGuiTextInputEvent e);
+		void onDropdownEvent(ofxDatGuiDropdownEvent e);
 };
