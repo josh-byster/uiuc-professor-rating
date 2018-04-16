@@ -1,14 +1,13 @@
 
 #### Introduction
 
-I would like to propose a laundry viewing application for housing at Illinois. I recently found out that Illinois is switching over to a LaundryView application that is new and has not yet been deployed publicly (advertised) at this point.
-
-The API is located [here](http://www.laundryview.com/housingillinois "here"). 
+I would like to propose a "teacher auditing application" that I can use to look up certain statistics about professors at UIUC.
+This will be using some of Wade Fagen-Ulmschneider's data along with possibly RateMyProfessors.com as a stretch goal. I would like to have the interface be relatively simple: a search functionality in which we can look up each professor and then pull relevant data from the CSV that Wade created with all data.
 
 #### Frameworks Used
 
-I would like to use some framework that enables parsing of XML data which is how the API conveys information. I'm proposing using Xerces-C++ XML Parser along with Libcurl or some similar framework to get data asynchronously. 
+I would like to use some framework that enables parsing of CSV data. I will likely use either C++: Minimalistic CSV Streams (found here: https://www.codeproject.com/Articles/741183/Cplusplus-Minimalistic-CSV-Streams) or Boost Tokenizer to do this. I may also need to use a Framework to do some form of autocompletion for typing names.
 
 #### Background
 
-I'm already a bit familiar with loading API data along with styling the design from making my UIUC Bus website. I also am familiar with asynchronous processes from coding apps for iOS.
+I've done some work in Python regarding parsing CSV data and computing statistics. I think that despite it being more difficult in C++, I think it will be easier with OpenFrameworks to incorporate the user interface.
