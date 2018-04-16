@@ -12,6 +12,7 @@ class DataFrame {
       DataFrame() {}
       std::vector<Course> getCoursesByInstructor(std::string professorName);  
       std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit);
+      double getSectionGPA(Section section);
     private:
       std::unordered_map<std::string,std::vector<Course>> instructorCourseMap;
       std::unordered_map<Section, std::vector<Course>> sectionMap;

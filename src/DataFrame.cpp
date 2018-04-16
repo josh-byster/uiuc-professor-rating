@@ -39,3 +39,13 @@ std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string profes
     }
     return matches;
 }
+
+double DataFrame::getSectionGPA(Section section){
+    double gpaStudents = 0;
+    int totalStudents = 0;
+    for(const Course& course : sectionMap[section]){
+        gpaStudents+=course.getGPA()*course.getNumStudents();
+        totalStudents+=course.getNumStudents();
+    }
+    return gpaStudents / totalStudents;
+}

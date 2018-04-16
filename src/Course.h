@@ -12,7 +12,8 @@ struct Course {
         std::vector<int> gradesGiven;
         std::string instructorName;
         std::string getNextItemInLine(std::string& line);
-        double getGPA();
+        double getGPA() const;
+        double getNumStudents() const;
 
 };
 #endif

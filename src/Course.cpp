@@ -39,7 +39,7 @@ std::string Course::getNextItemInLine(std::string& row){
     return item;
 }
 
-double Course::getGPA(){
+double Course::getGPA() const{
     double qualityPoints = 0;
     int studentCount = 0;
 
@@ -49,4 +49,14 @@ double Course::getGPA(){
     }
 
     return qualityPoints / studentCount;
+}
+
+double Course::getNumStudents() const{
+    int studentCount = 0;
+
+    for(int i = 0; i < 13; i++){
+        studentCount += gradesGiven[i];
+    }
+
+    return studentCount;
 }
