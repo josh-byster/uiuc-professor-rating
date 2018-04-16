@@ -3,11 +3,12 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "Course.h"
 class CSVReader {
     
     public:
         CSVReader(std::string filename) : filename(filename) { };
-        std::vector<std::vector<std::string>> getData();
+        std::vector<Course> getData();
     private:
         std::string filename;
         
