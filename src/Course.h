@@ -3,16 +3,16 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "Section.h"
 class Course {
 
     public:
         Course(std::string row);
-
+        unsigned int getYear();
+        std::string getTerm();
+        std::string getSubject();
     private:
-        unsigned int year;
-        std::string term;
-        std::string subject;
-        unsigned int courseNumber;
+        Section section;
         std::string courseTitle;
         std::vector<int> gradesGiven;
         std::string instructorName;

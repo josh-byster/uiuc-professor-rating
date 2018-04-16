@@ -1,12 +1,14 @@
 #include "Course.h"
 
 Course::Course(std::string row){
-    year = std::stoi(getNextItemInLine(row));
-    term = getNextItemInLine(row);
-    subject = getNextItemInLine(row);
+    unsigned int year = std::stoi(getNextItemInLine(row));
+    std::string term = getNextItemInLine(row);
+    std::string subject = getNextItemInLine(row);
     // get one extra line since it's YearTerm and it's unnecessary 
     getNextItemInLine(row);
-    courseNumber = std::stoi(getNextItemInLine(row));
+    unsigned int courseNumber = std::stoi(getNextItemInLine(row));
+    
+    section = Section(year,term,subject,courseNumber);
     courseTitle = getNextItemInLine(row);
 
     for(int i = 0; i < 14; i++){
