@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxDatGui.h"
-
+#include "CSVReader.h"
 class ofApp : public ofBaseApp{
 
 	public:

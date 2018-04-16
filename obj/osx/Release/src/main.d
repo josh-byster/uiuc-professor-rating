@@ -573,7 +573,8 @@ obj/osx/Release/src/main.o: \
   /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiMatrix.h \
   /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiTimeGraph.h \
   /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiScrollView.h \
-  /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiControls.h
+  /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiControls.h \
+  /Users/joshbyster/Dropbox/Documents/Academic/CS126/repos/final-project-josh-byster/src/CSVReader.h
 
 /Users/joshbyster/Downloads/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h:
 
@@ -1722,3 +1723,5 @@ obj/osx/Release/src/main.o: \
 /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiScrollView.h:
 
 /Users/joshbyster/Downloads/of_v0.9.8_osx_release/addons/ofxDatGui/src/components/ofxDatGuiControls.h:
+
+/Users/joshbyster/Dropbox/Documents/Academic/CS126/repos/final-project-josh-byster/src/CSVReader.h:
