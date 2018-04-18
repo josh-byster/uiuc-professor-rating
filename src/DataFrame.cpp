@@ -12,8 +12,13 @@ DataFrame::DataFrame(std::string filename){
     
 }
 
-std::vector<Course> DataFrame::getCoursesByInstructor(std::string professorName) const{
-    return instructorCourseMap.at(professorName);
+std::map<Section,std::vector<Course>> DataFrame::getSectionMapByInstructor(std::string professorName) const{
+    std::map<Section,std::vector<Course>> sectionMap;
+    std::vector<Course> courseList = instructorCourseMap.at(professorName);
+    for(Course course : courseList){
+        sectionMap[course.section].push_back(course);
+    }
+    return sectionMap;
 }
 
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{

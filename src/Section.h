@@ -13,6 +13,24 @@ struct Section {
         return (year == other.year && term == other.term 
         && subject == other.subject && courseNumber == other.courseNumber);
     }
+    bool operator>(const Section &other) const { // greater will be newer (so if this > other, "this" occured after other)
+        if(this->year > other.year){
+          return true;
+        }
+        if(this->year == other.year && this->term == "Fall" && other.term == "Spring"){
+          return true;
+        }
+        return false;
+    }
+    bool operator<(const Section &other) const {
+        if(this->year < other.year){
+          return true;
+        }
+        if(this->year == other.year && this->term == "Spring" && other.term == "Fall"){
+          return true;
+        }
+        return false;
+    }
 
 };
 
@@ -33,5 +51,7 @@ namespace std {
   };
 
 }
+
+
 
 #endif

@@ -6,11 +6,12 @@
 #include "Course.h"
 #include "CSVReader.h"
 #include <unordered_map>
+#include <map>
 class DataFrame {
     public:
       DataFrame(std::string filename);
       DataFrame() {}
-      std::vector<Course> getCoursesByInstructor(std::string professorName) const;  
+      std::map<Section,std::vector<Course>> getSectionMapByInstructor(std::string professorName) const;  
       std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;
       double getSectionGPA(Section section) const;
     private:

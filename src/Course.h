@@ -14,6 +14,21 @@ struct Course {
         std::string getNextItemInLine(std::string& line);
         double getGPA() const;
         double getNumStudents() const;
+        bool operator>(const Course &other) const {
+            return this->section > other.section;
+        }
+        bool operator<(const Course &other) const {
+            return this->section < other.section;
+        }
 
 };
+
+// Comparator as https://stackoverflow.com/a/5733353/3813411
+struct compareCourse {
+    bool operator()(const Course& first, const Course& second) const {
+        return first.section < second.section;
+    }
+};
+
+
 #endif
