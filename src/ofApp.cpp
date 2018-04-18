@@ -39,6 +39,10 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
     ofxDatGuiDropdownOption* selectedOption = searchResults->getChildAt(e.child);
     //layoutGui();
     std::cout<<selectedOption->getLabel()<<std::endl;
+
+    for(const Course& c : dataframe.getCoursesByInstructor(selectedOption->getLabel())){
+        std::cout<<c.courseTitle<<std::endl;
+    }
 }
 
 //--------------------------------------------------------------
