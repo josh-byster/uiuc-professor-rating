@@ -2,7 +2,8 @@
 
 In this file, I will keep track of the changes that I've made to my project.
 
-Update: Thursday, April 19th 
+Update: As of Thursday, April 19th
+
 I have gone through the process of creating the following:
 
  - Updated Proposal.md to the final version
