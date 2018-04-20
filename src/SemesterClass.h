@@ -1,19 +1,19 @@
-#ifndef SECTION_H
-#define SECTION_H
+#ifndef SEMESTERCLASS_H
+#define SEMESTERCLASS_H
 #include <string>
 
-struct Section {
+struct SemesterClass {
     unsigned int year;
     std::string term;
     std::string subject;
     unsigned int courseNumber;
-    Section() {}
-    Section(unsigned int year, std::string term, std::string subject, unsigned int courseNumber) : year(year), term(term), subject(subject), courseNumber(courseNumber) {}
-    bool operator==(const Section &other) const {
+    SemesterClass() {}
+    SemesterClass(unsigned int year, std::string term, std::string subject, unsigned int courseNumber) : year(year), term(term), subject(subject), courseNumber(courseNumber) {}
+    bool operator==(const SemesterClass &other) const {
         return (year == other.year && term == other.term 
         && subject == other.subject && courseNumber == other.courseNumber);
     }
-    bool operator>(const Section &other) const { // greater will be newer (so if this > other, "this" occured after other)
+    bool operator>(const SemesterClass &other) const { // greater will be newer (so if this > other, "this" occured after other)
         if(this->year > other.year){
           return true;
         }
@@ -22,7 +22,7 @@ struct Section {
         }
         return false;
     }
-    bool operator<(const Section &other) const {
+    bool operator<(const SemesterClass &other) const {
         if(this->year < other.year){
           return true;
         }
@@ -38,9 +38,9 @@ struct Section {
 //https://stackoverflow.com/a/17017281/3813411
 namespace std {
     template <>
-  struct hash<Section>
+  struct hash<SemesterClass>
   {
-    std::size_t operator()(const Section& value) const
+    std::size_t operator()(const SemesterClass& value) const
     {
       using std::size_t;
       using std::hash;

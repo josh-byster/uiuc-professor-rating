@@ -5,20 +5,20 @@ DataFrame::DataFrame(std::string filename){
     CSVReader reader(filename);
     std::vector<Course> courseData = reader.getData();
     for(auto course : courseData){
-        sectionMap[course.section].push_back(course);
+        semesterClassMap[course.semesterClass].push_back(course);
         instructorCourseMap[course.instructorName].push_back(course);
         instructorNames.insert(course.instructorName);
     }
     
 }
 
-std::map<Section,std::vector<Course>> DataFrame::getSectionMapByInstructor(std::string professorName) const{
-    std::map<Section,std::vector<Course>> sectionMap;
+std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInstructor(std::string professorName) const{
+    std::map<SemesterClass,std::vector<Course>> semesterClassMap;
     std::vector<Course> courseList = instructorCourseMap.at(professorName);
     for(Course course : courseList){
-        sectionMap[course.section].push_back(course);
+        semesterClassMap[course.semesterClass].push_back(course);
     }
-    return sectionMap;
+    return semesterClassMap;
 }
 
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{
@@ -36,10 +36,10 @@ std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string profes
     return matches;
 }
 
-double DataFrame::getSectionGPA(Section section) const{
+double DataFrame::getSemesterClassGPA(SemesterClass semesterClass) const{
     double gpaStudents = 0;
     int totalStudents = 0;
-    for(const Course& course : sectionMap.at(section)){
+    for(const Course& course : semesterClassMap.at(semesterClass)){
         gpaStudents+=course.getGPA()*course.getNumStudents();
         totalStudents+=course.getNumStudents();
     }

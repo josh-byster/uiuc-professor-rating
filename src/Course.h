@@ -3,11 +3,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Section.h"
+#include "SemesterClass.h"
 #include "Constants.h"
 struct Course {
         Course(std::string row);
-        Section section;
+        SemesterClass semesterClass;
         std::string courseTitle;
         std::vector<int> gradesGiven;
         std::string instructorName;
@@ -15,10 +15,10 @@ struct Course {
         double getGPA() const;
         double getNumStudents() const;
         bool operator>(const Course &other) const {
-            return this->section > other.section;
+            return this->semesterClass > other.semesterClass;
         }
         bool operator<(const Course &other) const {
-            return this->section < other.section;
+            return this->semesterClass < other.semesterClass;
         }
 
 };
@@ -26,7 +26,7 @@ struct Course {
 // Comparator as https://stackoverflow.com/a/5733353/3813411
 struct compareCourse {
     bool operator()(const Course& first, const Course& second) const {
-        return first.section < second.section;
+        return first.semesterClass < second.semesterClass;
     }
 };
 

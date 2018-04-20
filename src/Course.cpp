@@ -9,10 +9,10 @@ Course::Course(std::string row){
     
     unsigned int courseNumber = std::stoi(getNextItemInLine(row));
     
-    section = Section(year,term,subject,courseNumber);
+    semesterClass = SemesterClass(year,term,subject,courseNumber);
     courseTitle = getNextItemInLine(row);
     // std::cout<<"YEAR: "<<year<< " TERM: "<<term<< " SUBJECT: "<<subject<<"CNUMBER: "<<courseNumber<<std::endl;
-    // std::cout<<std::hash<Section>()(section)<<std::endl;
+    // std::cout<<std::hash<SemesterClass>()(semesterClass)<<std::endl;
     for(int i = 0; i < 14; i++){
         gradesGiven.push_back(std::stoi(getNextItemInLine(row)));
     }

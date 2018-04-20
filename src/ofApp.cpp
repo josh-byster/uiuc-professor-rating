@@ -39,11 +39,11 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
     ofxDatGuiDropdownOption* selectedOption = searchResults->getChildAt(e.child);
     //layoutGui();
     std::cout<<"The full name of the instructor is: "<<selectedOption->getLabel()<<std::endl;
-    std::map<Section,std::vector<Course>> courseMap = dataframe.getSectionMapByInstructor(selectedOption->getLabel());
+    std::map<SemesterClass,std::vector<Course>> courseMap = dataframe.getSemesterClassMapByInstructor(selectedOption->getLabel());
     for(auto it = courseMap.begin(); it != courseMap.end(); ++it){
-        Section section = it->first;
+        SemesterClass semesterClass = it->first;
         std::vector<Course> courseList = it->second;
-        std::cout<<"SECTION: "<<section.subject<<section.courseNumber<<" "<< section.term<< " "<<section.year<<std::endl;
+        std::cout<<"SEMESTER CLASS: "<<semesterClass.subject<<semesterClass.courseNumber<<" "<< semesterClass.term<< " "<<semesterClass.year<<std::endl;
         std::cout<<"COURSE COUNT: "<<courseList.size()<<std::endl;
     }
 }

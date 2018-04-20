@@ -11,12 +11,12 @@ class DataFrame {
     public:
       DataFrame(std::string filename);
       DataFrame() {}
-      std::map<Section,std::vector<Course>> getSectionMapByInstructor(std::string professorName) const;  
+      std::map<SemesterClass,std::vector<Course>> getSemesterClassMapByInstructor(std::string professorName) const;  
       std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;
-      double getSectionGPA(Section section) const;
+      double getSemesterClassGPA(SemesterClass semesterClass) const;
     private:
       std::unordered_map<std::string,std::vector<Course>> instructorCourseMap;
-      std::unordered_map<Section, std::vector<Course>> sectionMap;
+      std::unordered_map<SemesterClass, std::vector<Course>> semesterClassMap;
       std::unordered_set<std::string> instructorNames;
 
 };
