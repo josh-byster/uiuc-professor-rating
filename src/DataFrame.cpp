@@ -37,11 +37,28 @@ std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string profes
 }
 
 double DataFrame::getSemesterClassGPA(SemesterClass semesterClass) const{
+    return getGPAByCourseVector(semesterClassMap.at(semesterClass));
+}
+
+double DataFrame::getGPAExcludingInstructor(SemesterClass semesterClass, std::string excludedInstructor) const {
+    std::vector<Course> courseList;
+    for(Course course : semesterClassMap.at(semesterClass)){
+        if(course.instructorName != excludedInstructor){
+            courseList.push_back(course);
+        }
+    }
+    return getGPAByCourseVector(courseList);
+}
+
+double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const{
     double gpaStudents = 0;
     int totalStudents = 0;
-    for(const Course& course : semesterClassMap.at(semesterClass)){
+    for(const Course& course : gpaVector){
         gpaStudents+=course.getGPA()*course.getNumStudents();
         totalStudents+=course.getNumStudents();
+    }
+    if(totalStudents == 0){
+        return 0;
     }
     return gpaStudents / totalStudents;
 }

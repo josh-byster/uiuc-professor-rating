@@ -14,6 +14,8 @@ class DataFrame {
       std::map<SemesterClass,std::vector<Course>> getSemesterClassMapByInstructor(std::string professorName) const;  
       std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;
       double getSemesterClassGPA(SemesterClass semesterClass) const;
+      double getGPAByCourseVector(std::vector<Course> gpaVector) const;
+      double getGPAExcludingInstructor(SemesterClass semesterClass, std::string excludedInstructor) const;
     private:
       std::unordered_map<std::string,std::vector<Course>> instructorCourseMap;
       std::unordered_map<SemesterClass, std::vector<Course>> semesterClassMap;

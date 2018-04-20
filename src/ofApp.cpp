@@ -45,6 +45,8 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         std::vector<Course> courseList = it->second;
         std::cout<<"SEMESTER CLASS: "<<semesterClass.subject<<semesterClass.courseNumber<<" "<< semesterClass.term<< " "<<semesterClass.year<<std::endl;
         std::cout<<"COURSE COUNT: "<<courseList.size()<<std::endl;
+        std::cout<<"PROF GPA: "<<dataframe.getGPAByCourseVector(courseList)<<std::endl;
+        std::cout<<"OTHER: "<<dataframe.getGPAExcludingInstructor(semesterClass,selectedOption->getLabel())<<std::endl;
     }
 }
 

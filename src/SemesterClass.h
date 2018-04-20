@@ -13,6 +13,9 @@ struct SemesterClass {
         return (year == other.year && term == other.term 
         && subject == other.subject && courseNumber == other.courseNumber);
     }
+    bool operator!=(const SemesterClass &other) const {
+        return !(*this == other);
+    }
     bool operator>(const SemesterClass &other) const { // greater will be newer (so if this > other, "this" occured after other)
         if(this->year > other.year){
           return true;
