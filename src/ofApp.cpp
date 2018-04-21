@@ -4,6 +4,7 @@
 void ofApp::setup(){
     
     searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
+    infoGui = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
     searchInput = searchGui->addTextInput("Last Name:", "Fagen-Ulmschneider");
     searchInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
     searchResults = nullptr;
@@ -40,6 +41,7 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
     //layoutGui();
     std::cout<<"The full name of the instructor is: "<<selectedOption->getLabel()<<std::endl;
     std::map<SemesterClass,std::vector<Course>> courseMap = dataframe.getSemesterClassMapByInstructor(selectedOption->getLabel());
+    clearLabels();
     for(auto it = courseMap.begin(); it != courseMap.end(); ++it){
         SemesterClass semesterClass = it->first;
         std::vector<Course> courseList = it->second;
@@ -47,6 +49,8 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         std::cout<<"COURSE COUNT: "<<courseList.size()<<std::endl;
         std::cout<<"PROF GPA: "<<dataframe.getGPAByCourseVector(courseList)<<std::endl;
         std::cout<<"OTHER: "<<dataframe.getGPAExcludingInstructor(semesterClass,selectedOption->getLabel())<<std::endl;
+        infoLabels.push_back(infoGui->addLabel(semesterClass.subject + std::to_string(semesterClass.courseNumber) + semesterClass.term + std::to_string(semesterClass.year) + "     " + std::to_string(dataframe.getGPAByCourseVector(courseList))));
+        infoLabels[0]->setStripeColor(ofColor::green);
     }
 }
 
@@ -107,4 +111,11 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+void ofApp::clearLabels(){
+    for(ofxDatGuiLabel* label : infoLabels){
+        label->setVisible(false);
+    }
+    infoLabels.clear();
 }

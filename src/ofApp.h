@@ -5,6 +5,8 @@
 #include "CSVReader.h"
 #include "Constants.h"
 #include "DataFrame.h"
+#include <vector>
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -28,9 +30,12 @@ class ofApp : public ofBaseApp{
 		
 	private:
 		ofxDatGui* searchGui;
+		ofxDatGui* infoGui;
+		std::vector<ofxDatGuiLabel*> infoLabels;
 		ofxDatGuiTextInput* searchInput;
 		ofxDatGuiDropdown* searchResults;
 		DataFrame dataframe;
 		void onTextInputEvent(ofxDatGuiTextInputEvent e);
 		void onDropdownEvent(ofxDatGuiDropdownEvent e);
+		void clearLabels();
 };
