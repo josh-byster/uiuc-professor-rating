@@ -30,7 +30,7 @@ void ofApp::onTextInputEvent(ofxDatGuiTextInputEvent e)
     searchResults = searchGui->addDropdown("Results",matches);
     searchResults->setVisible(true);
     searchResults->onDropdownEvent(this, &ofApp::onDropdownEvent);
-
+    searchResults->expand();
 }
 
 void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
