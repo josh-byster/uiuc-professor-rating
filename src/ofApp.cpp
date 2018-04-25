@@ -71,8 +71,19 @@ void ofApp::addCourseLabel(SemesterClass semesterClass, std::vector<Course> cour
                + semesterClass.term + " "
                + std::to_string(semesterClass.year) + "    "
                + std::to_string(round(1000*courseGPA)/1000).substr(0,5);
+    
+    std::pair<int,int> instructorRelativeRank = dataframe.getInstructorRankForSemesterClass(semesterClass,professorName);
+    description+="("+std::to_string(instructorRelativeRank.first) +" / "+std::to_string(instructorRelativeRank.second) + ")";
+    //if(instructorRelativeRank.first == 1) { 
+    //    description+=" WORST GPA ";
+    //}
+    //if(instructorRankByGPA[instructorRankByGPA.size()-1].first == professorName) { // vector is sorted ascending, so being the first entry means worst GPA
+    //    description+=" BEST GPA ";
+    //}
     ofxDatGuiLabel* label = infoGui->addLabel(description);
     infoLabels.push_back(label);
+
+    
     if(nonInstructorGPA == 0){
        label->setStripeColor(ofColor::orange);
     } else if(courseGPA < nonInstructorGPA){ // it's lower than average, so mark red

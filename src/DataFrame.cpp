@@ -65,8 +65,20 @@ std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemes
     std::sort(sortedProfessorGPAList.begin(),sortedProfessorGPAList.end(),sortByGPA);
     return sortedProfessorGPAList;
 }
+
+std::pair<int,int> DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string professorName) const {
+    std::vector<std::pair<std::string,double>> instructorRankByGPA = getInstructorRanksForSemesterClass(semesterClass);
+    int rank = -1;
+    for(int i = 0; i < instructorRankByGPA.size(); i++) {
+        if(instructorRankByGPA[i].first == professorName){
+            rank = i+1;
+        }
+    }
+    return std::pair<int,int>(rank,instructorRankByGPA.size());
+}
+
 bool sortByGPA(const std::pair<std::string,double>& a, const std::pair<std::string,double>& b){
-    return(a.second < b.second);
+    return (a.second > b.second);
 }
 double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const{
     double gpaStudents = 0;
