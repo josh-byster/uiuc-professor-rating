@@ -38,4 +38,5 @@ class ofApp : public ofBaseApp{
 		void onTextInputEvent(ofxDatGuiTextInputEvent e);
 		void onDropdownEvent(ofxDatGuiDropdownEvent e);
 		void clearLabels();
+		void addCourseLabel(SemesterClass semesterClass, std::vector<Course> courseList);
 };

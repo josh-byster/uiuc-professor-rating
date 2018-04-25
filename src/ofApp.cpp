@@ -42,6 +42,7 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
     std::cout<<"The full name of the instructor is: "<<selectedOption->getLabel()<<std::endl;
     std::map<SemesterClass,std::vector<Course>> courseMap = dataframe.getSemesterClassMapByInstructor(selectedOption->getLabel());
     clearLabels();
+    int labelNumber = 0;
     for(auto it = courseMap.begin(); it != courseMap.end(); ++it){
         SemesterClass semesterClass = it->first;
         std::vector<Course> courseList = it->second;
@@ -49,9 +50,31 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         std::cout<<"COURSE COUNT: "<<courseList.size()<<std::endl;
         std::cout<<"PROF GPA: "<<dataframe.getGPAByCourseVector(courseList)<<std::endl;
         std::cout<<"OTHER: "<<dataframe.getGPAExcludingInstructor(semesterClass,selectedOption->getLabel())<<std::endl;
-        infoLabels.push_back(infoGui->addLabel(semesterClass.subject + std::to_string(semesterClass.courseNumber) + semesterClass.term + std::to_string(semesterClass.year) + "     " + std::to_string(dataframe.getGPAByCourseVector(courseList))));
-        infoLabels[0]->setStripeColor(ofColor::green);
+        addCourseLabel(semesterClass,courseList);
     }
+}
+
+void ofApp::addCourseLabel(SemesterClass semesterClass, std::vector<Course> courseList){
+    std::string description;
+    double courseGPA = dataframe.getGPAByCourseVector(courseList);
+    std::string professorName = courseList[0].instructorName;
+    double nonInstructorGPA = dataframe.getGPAExcludingInstructor(semesterClass,professorName);
+
+    description+= semesterClass.subject 
+               + std::to_string(semesterClass.courseNumber) + " "
+               + semesterClass.term + " "
+               + std::to_string(semesterClass.year) + "    "
+               + std::to_string(round(1000*courseGPA)/1000).substr(0,4);
+    ofxDatGuiLabel* label = infoGui->addLabel(description);
+    infoLabels.push_back(label);
+    if(nonInstructorGPA == 0){
+       label->setStripeColor(ofColor::orange);
+    } else if(courseGPA < nonInstructorGPA){ // it's lower than average, so mark red
+        label->setStripeColor(ofColor::red);
+    } else {
+        label->setStripeColor(ofColor::green);
+    }
+    
 }
 
 //--------------------------------------------------------------
