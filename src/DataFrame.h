@@ -16,12 +16,15 @@ class DataFrame {
       double getSemesterClassGPA(SemesterClass semesterClass) const;
       double getGPAByCourseVector(std::vector<Course> gpaVector) const;
       double getGPAExcludingInstructor(SemesterClass semesterClass, std::string excludedInstructor) const;
+      std::vector<std::pair<std::string,double>> getInstructorRanksForSemesterClass(SemesterClass semesterClass) const;
     private:
       std::unordered_map<std::string,std::vector<Course>> instructorCourseMap;
       std::unordered_map<SemesterClass, std::vector<Course>> semesterClassMap;
       std::unordered_set<std::string> instructorNames;
 
 };
+
+bool sortByGPA(const std::pair<std::string,double>& a, const std::pair<std::string,double>& b);
 
 
 #endif

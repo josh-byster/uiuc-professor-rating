@@ -50,6 +50,12 @@ void ofApp::onDropdownEvent(ofxDatGuiDropdownEvent e)
         std::cout<<"COURSE COUNT: "<<courseList.size()<<std::endl;
         std::cout<<"PROF GPA: "<<dataframe.getGPAByCourseVector(courseList)<<std::endl;
         std::cout<<"OTHER: "<<dataframe.getGPAExcludingInstructor(semesterClass,selectedOption->getLabel())<<std::endl;
+        
+        std::vector<std::pair<std::string,double>> instructorRankByGPA = dataframe.getInstructorRanksForSemesterClass(semesterClass);
+        std::cout<<"OTHER PROFESSORS THIS SEMESTER: "<<std::endl;
+        for(std::pair<std::string,double> instructorGPAPair : instructorRankByGPA){
+            std::cout<<instructorGPAPair.first<<": "<<instructorGPAPair.second<<std::endl;
+        }
         addCourseLabel(semesterClass,courseList);
     }
 }
@@ -64,7 +70,7 @@ void ofApp::addCourseLabel(SemesterClass semesterClass, std::vector<Course> cour
                + std::to_string(semesterClass.courseNumber) + " "
                + semesterClass.term + " "
                + std::to_string(semesterClass.year) + "    "
-               + std::to_string(round(1000*courseGPA)/1000).substr(0,4);
+               + std::to_string(round(1000*courseGPA)/1000).substr(0,5);
     ofxDatGuiLabel* label = infoGui->addLabel(description);
     infoLabels.push_back(label);
     if(nonInstructorGPA == 0){

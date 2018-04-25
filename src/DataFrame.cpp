@@ -49,7 +49,25 @@ double DataFrame::getGPAExcludingInstructor(SemesterClass semesterClass, std::st
     }
     return getGPAByCourseVector(courseList);
 }
-
+std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemesterClass(SemesterClass semesterClass) const {
+    std::map<std::string,std::vector<Course>> currentInstructorCourseMap;
+    for(Course course : semesterClassMap.at(semesterClass)){
+        currentInstructorCourseMap[course.instructorName].push_back(course);
+    }
+    std::map<std::string,double> instructorGPAMap;
+    for(std::pair<std::string,std::vector<Course>> instructorCourseListPair : currentInstructorCourseMap){
+        instructorGPAMap[instructorCourseListPair.first] = getGPAByCourseVector(instructorCourseListPair.second);
+    }
+    std::vector<std::pair<std::string,double>> sortedProfessorGPAList;
+    for(std::pair<std::string,double> instructorGPAPair : instructorGPAMap){
+        sortedProfessorGPAList.push_back(instructorGPAPair);
+    }
+    std::sort(sortedProfessorGPAList.begin(),sortedProfessorGPAList.end(),sortByGPA);
+    return sortedProfessorGPAList;
+}
+bool sortByGPA(const std::pair<std::string,double>& a, const std::pair<std::string,double>& b){
+    return(a.second < b.second);
+}
 double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const{
     double gpaStudents = 0;
     int totalStudents = 0;

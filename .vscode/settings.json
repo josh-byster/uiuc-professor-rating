@@ -17,6 +17,12 @@
         "utility": "cpp",
         "map": "cpp",
         "string_view": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "iosfwd": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "iterator": "cpp",
+        "unordered_set": "cpp"
     }
 }
