@@ -24,6 +24,14 @@
         "__tree": "cpp",
         "iterator": "cpp",
         "unordered_set": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "cmath": "cpp",
+        "bitset": "cpp",
+        "__locale": "cpp",
+        "optional": "cpp",
+        "functional": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "type_traits": "cpp"
     }
 }
