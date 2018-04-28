@@ -27,12 +27,14 @@ LDFLAG2 = -std=c++11
 testing: data_test.o test_main.o dataframe.o csvreader.o course.o
 	$(LD2) $^ $(LDFLAG2) -o $@
 
-data_test.o: test/data_test.cpp
+
+data_test.o: test/data_test.cpp src/*.h
 	$(CXX2) $< $(CXXFLAG2)
 
-test_main.o: test/test_main.cpp
+test_main.o: test/test_main.cpp src/*.h
 	$(CXX2) $< $(CXXFLAG2)
 
 dataframe.o: src/DataFrame.cpp src/CSVReader.cpp src/Course.cpp
 	$(CXX2) $^ $(CXXFLAG2)
+
 

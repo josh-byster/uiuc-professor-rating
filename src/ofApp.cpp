@@ -69,7 +69,7 @@ void ofApp::addCourseLabel(SemesterClass semesterClass, std::vector<Course> cour
 
     description+= semesterClass.subject 
                + std::to_string(semesterClass.courseNumber) + " "
-               + semesterClass.term + " "
+               + termArray[semesterClass.term] + " "
                + std::to_string(semesterClass.year) + "    "
                + std::to_string(round(1000*courseGPA)/1000).substr(0,5);
     
