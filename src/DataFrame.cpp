@@ -81,7 +81,7 @@ std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemes
 std::pair<int,int> DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string professorName) const {
     std::vector<std::pair<std::string,double>> instructorRankByGPA = getInstructorRanksForSemesterClass(semesterClass);
     int rank = -1;
-    for(int i = 0; i < instructorRankByGPA.size(); i++) {
+    for(unsigned i = 0; i < instructorRankByGPA.size(); i++) {
         if(instructorRankByGPA[i].first == professorName){
             rank = i+1;
         }

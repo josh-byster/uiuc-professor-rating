@@ -4,11 +4,22 @@
 
 struct SemesterClass {
     unsigned int year;
-    std::string term;
+    enum Term {SPRING = 0, SUMMER = 1, FALL = 2};
+    Term term;
     std::string subject;
     unsigned int courseNumber;
     SemesterClass() {}
-    SemesterClass(unsigned int year, std::string term, std::string subject, unsigned int courseNumber) : year(year), term(term), subject(subject), courseNumber(courseNumber) {}
+    SemesterClass(unsigned int year, std::string term, std::string subject, unsigned int courseNumber) : year(year), subject(subject), courseNumber(courseNumber) {
+      if(term == "Spring"){
+        this->term = SPRING;
+      }
+      if(term == "Summer"){
+        this->term = SUMMER;
+      }
+      if(term == "Fall"){
+        this->term = FALL;
+      }
+    }
     bool operator==(const SemesterClass &other) const {
         return (year == other.year && term == other.term 
         && subject == other.subject && courseNumber == other.courseNumber);
@@ -20,19 +31,39 @@ struct SemesterClass {
         if(this->year > other.year){
           return true;
         }
-        if(this->year == other.year && this->term == "Fall" && other.term == "Spring"){
-          return true;
-        }
         return this->subject > other.subject || (this->subject == other.subject && this->courseNumber > other.courseNumber);
     }
     bool operator<(const SemesterClass &other) const {
+        if(*this == other){
+          return false;
+        }
         if(this->year < other.year){
           return true;
         }
-        if(this->year == other.year && this->term == "Spring" && other.term == "Fall"){
-          return true;
+        if(this->year > other.year){
+          return false;
         }
-        return this->subject < other.subject || (this->subject == other.subject && this->courseNumber < other.courseNumber);
+        if(this->year == other.year){
+          if(this->term<other.term){
+            return true;
+          }
+          if(this->term>other.term){
+            return false;
+          }
+        }
+        if(this->year == other.year && this->term == other.term){
+          if(this->subject < other.subject){
+            return true;
+          }
+          if(this->subject > other.subject){
+            return false;
+          }
+          if(this->subject == other.subject){
+            return this->courseNumber<other.courseNumber;
+          }
+        }
+        std::cout<<"WE HAVE AN ISSUE"<<std::endl;
+        return false;
     }
 
 };
@@ -49,7 +80,7 @@ namespace std {
       using std::hash;
       using std::string;
 
-      return (hash<int>()(value.year) + hash<string>()(value.term) + hash<int>()(value.courseNumber) + hash<string>()(value.subject));
+      return (hash<int>()(value.year) * hash<int>()(value.term) + hash<int>()(value.courseNumber) + hash<string>()(value.subject));
     }
   };
 
