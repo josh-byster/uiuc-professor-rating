@@ -58,6 +58,7 @@
 #			$(PROJECT_ROOT)/bin%
 #			$(PROJECT_ROOT)/obj%
 #			$(PROJECT_ROOT)/%.xcodeproj
+PROJECT_EXCLUSIONS = $(PROJECT_ROOT)/test%
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
