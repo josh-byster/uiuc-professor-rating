@@ -15,16 +15,20 @@ include $(OF_ROOT)/libs/openFrameworksCompiled/project/makefileCommon/compile.pr
 
 
 CXX2 = clang++
-CXXFLAG2 = -std=c++11 -c -g -O0 -Wall -Wextra
+CXXFLAG2 = -std=c++11 -c -g -O0 -Wall -Wextra 
 LD2 = clang++
 LDFLAG2 = -std=c++11
 
-testing: data_test.o test_main.o
-	$(LD2) $^ $(LDFLAG2) -o $@
+testing: data_test dataframe
+	$(LD2) *.o $(LDFLAG2) -o $@
 
-data_test.o: test/data_test.cpp
-	$(CXX2) $< $(CXXFLAG2)
+data_test: test/test_main.cpp test/data_test.cpp
+	$(CXX2) $^ $(CXXFLAG2) 
 
-test_main.o: test/test_main.cpp
-	$(CXX2) $< $(CXXFLAG2)
+
+dataframe: src/DataFrame.cpp src/CSVReader.cpp src/Course.cpp
+	$(CXX2) $^ $(CXXFLAG2)
+
+cleantest:
+	-rm -f *.o *.out testing
 
