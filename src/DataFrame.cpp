@@ -21,6 +21,18 @@ std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInst
     return semesterClassMap;
 }
 
+const std::unordered_set<std::string>& DataFrame::getAllInstructorNames() const{
+    return instructorNames;
+}
+
+const std::unordered_map<std::string,std::vector<Course>>& DataFrame::getInstructorCourseMap() const{
+    return instructorCourseMap;
+}
+const std::unordered_map<SemesterClass,std::vector<Course>>& DataFrame::getSemesterClassMap() const{
+    return semesterClassMap;
+}
+
+
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{
     std::vector<std::string> matches;
     for(std::string instructor : instructorNames){
