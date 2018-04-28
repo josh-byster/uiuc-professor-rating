@@ -23,7 +23,7 @@ struct SemesterClass {
         if(this->year == other.year && this->term == "Fall" && other.term == "Spring"){
           return true;
         }
-        return false;
+        return this->subject > other.subject || (this->subject == other.subject && this->courseNumber > other.courseNumber);
     }
     bool operator<(const SemesterClass &other) const {
         if(this->year < other.year){
@@ -32,7 +32,7 @@ struct SemesterClass {
         if(this->year == other.year && this->term == "Spring" && other.term == "Fall"){
           return true;
         }
-        return false;
+        return this->subject < other.subject || (this->subject == other.subject && this->courseNumber < other.courseNumber);
     }
 
 };

@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetWindowShape(600, 300);
     
     searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
     infoGui = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
@@ -96,7 +97,11 @@ void ofApp::addCourseLabel(SemesterClass semesterClass, std::vector<Course> cour
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofColor colorOne(0, 0, 1);
+    ofColor colorTwo(255, 255, 255);
 
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
+    ofDrawBitmapString("Josh's Professor Rating App", ofGetWidth()/2-120, ofGetHeight()-50);
 }
 
 //--------------------------------------------------------------
