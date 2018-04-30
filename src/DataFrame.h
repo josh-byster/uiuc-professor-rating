@@ -9,7 +9,7 @@
 #include <map>
 class DataFrame {
     public:
-      DataFrame(std::string filename);
+      DataFrame(std::string filepath);
       DataFrame() {}
       std::map<SemesterClass,std::vector<Course>> getSemesterClassMapByInstructor(std::string professorName) const;  
       std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;

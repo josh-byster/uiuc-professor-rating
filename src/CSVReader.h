@@ -7,13 +7,13 @@
 #include <iostream>
 #include <vector>
 #include "Course.h"
+
 class CSVReader {
-    
     public:
         CSVReader(std::string filename) : filename(filename) { };
-        std::vector<Course> getData();
+        std::vector<Course> getCourseData();
     private:
-        std::string filename;
-        
+        std::string filename;  
 };
+
 #endif

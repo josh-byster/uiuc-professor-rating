@@ -3,11 +3,16 @@
 #include <iostream>
 #include <algorithm>
 #include "Constants.h"
-std::vector<Course> CSVReader::getData() {
+
+/**
+ * Get a vector of courses from the CSV file stored in instance variable "filename'
+ */
+std::vector<Course> CSVReader::getCourseData() {
 
     std::ifstream file(filename);
     std::vector<Course> courses;
     std::string line = "";
+
     if(file.fail()){
         std::cerr << "Error: " << strerror(errno);
     } else {
@@ -23,5 +28,4 @@ std::vector<Course> CSVReader::getData() {
     
     std::cout<<courses.size()<< " courses loaded from file."<<std::endl;
     return courses;
-    
 }
