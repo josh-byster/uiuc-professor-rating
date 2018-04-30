@@ -2,15 +2,21 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetWindowShape(600, 300);
-    
     searchGui = new ofxDatGui( ofxDatGuiAnchor::TOP_LEFT );
     infoGui = new ofxDatGui( ofxDatGuiAnchor::TOP_RIGHT);
-    searchInput = searchGui->addTextInput("Last Name:", "Fagen-Ulmschneider");
+    searchInput = searchGui->addTextInput("Last Name:", "");
     searchInput->onTextInputEvent(this, &ofApp::onTextInputEvent);
     searchResults = nullptr;
 
     dataframe = DataFrame(FILE_PATH);
+
+    legendGui = new ofxDatGui( ofxDatGuiAnchor::BOTTOM_RIGHT);
+    legendGui->addLabel("Legend:");
+    legendGui->addLabel("(1/n) is easiest of n, (n/n) is hardest")->setStripeColor(ofColor::white);
+    legendGui->addLabel("Green - Above Average GPA")->setStripeColor(ofColor::green);
+    legendGui->addLabel("Red - Below Average GPA")->setStripeColor(ofColor::red);
+    legendGui->addLabel("Orange - Only Instructor")->setStripeColor(ofColor::orange);
+
 
 }
 

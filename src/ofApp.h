@@ -31,6 +31,7 @@ class ofApp : public ofBaseApp{
 	private:
 		ofxDatGui* searchGui;
 		ofxDatGui* infoGui;
+		ofxDatGui* legendGui;
 		std::vector<ofxDatGuiLabel*> infoLabels;
 		ofxDatGuiTextInput* searchInput;
 		ofxDatGuiDropdown* searchResults;
