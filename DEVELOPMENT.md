@@ -2,10 +2,13 @@
 
 In this file, I will keep track of the changes that I've made to my project.
 
-Update: As of Thursday, April 19th
+Updated Monday, April 30th
 
 I have gone through the process of creating the following:
-
+ - Added a legend to the GUI
+ - Fixed a bug that was computing GPAs for incorrect values when an instructor taught different courses the same semester
+ - Adding comments to the file
+ - Started writing testing framework to make sure calculations are correct
  - Updated Proposal.md to the final version
  - Generated a new OpenFrameworks project
  - Installed the ofxDatGui addon to display relevant data
