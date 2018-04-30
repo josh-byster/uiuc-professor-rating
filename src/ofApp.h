@@ -26,8 +26,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		
-		
 	private:
 		ofxDatGui* searchGui;
 		ofxDatGui* infoGui;
@@ -36,8 +34,8 @@ class ofApp : public ofBaseApp{
 		ofxDatGuiTextInput* searchInput;
 		ofxDatGuiDropdown* searchResults;
 		DataFrame dataframe;
-		void onTextInputEvent(ofxDatGuiTextInputEvent e);
-		void onDropdownEvent(ofxDatGuiDropdownEvent e);
+		void onTextInputEvent(ofxDatGuiTextInputEvent event);
+		void onDropdownEvent(ofxDatGuiDropdownEvent event);
 		void clearLabels();
 		void addCourseLabel(SemesterClass semesterClass, std::vector<Course> courseList);
 };

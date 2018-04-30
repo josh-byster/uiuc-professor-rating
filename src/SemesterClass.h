@@ -1,7 +1,7 @@
 #ifndef SEMESTERCLASS_H
 #define SEMESTERCLASS_H
 #include <string>
-
+#include <functional>
 struct SemesterClass {
     unsigned int year;
     enum Term {SPRING = 0, SUMMER = 1, FALL = 2};
@@ -20,51 +20,10 @@ struct SemesterClass {
         this->term = FALL;
       }
     }
-    bool operator==(const SemesterClass &other) const {
-        return (year == other.year && term == other.term 
-        && subject == other.subject && courseNumber == other.courseNumber);
-    }
-    bool operator!=(const SemesterClass &other) const {
-        return !(*this == other);
-    }
-    bool operator>(const SemesterClass &other) const { // greater will be newer (so if this > other, "this" occured after other)
-        if(this->year > other.year){
-          return true;
-        }
-        return this->subject > other.subject || (this->subject == other.subject && this->courseNumber > other.courseNumber);
-    }
-    bool operator<(const SemesterClass &other) const {
-        if(*this == other){
-          return false;
-        }
-        if(this->year < other.year){
-          return true;
-        }
-        if(this->year > other.year){
-          return false;
-        }
-        if(this->year == other.year){
-          if(this->term<other.term){
-            return true;
-          }
-          if(this->term>other.term){
-            return false;
-          }
-        }
-        if(this->year == other.year && this->term == other.term){
-          if(this->subject < other.subject){
-            return true;
-          }
-          if(this->subject > other.subject){
-            return false;
-          }
-          if(this->subject == other.subject){
-            return this->courseNumber<other.courseNumber;
-          }
-        }
-        std::cout<<"WE HAVE AN ISSUE"<<std::endl;
-        return false;
-    }
+    bool operator==(const SemesterClass &other) const;
+    bool operator!=(const SemesterClass &other) const;
+    bool operator>(const SemesterClass &other) const;
+    bool operator<(const SemesterClass &other) const;
 
 };
 

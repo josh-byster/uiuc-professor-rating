@@ -33,6 +33,8 @@
         "system_error": "cpp",
         "thread": "cpp",
         "type_traits": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "ios": "cpp",
+        "regex": "cpp"
     }
 }
