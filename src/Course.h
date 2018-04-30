@@ -5,6 +5,7 @@
 #include <iostream>
 #include "SemesterClass.h"
 #include "Constants.h"
+
 struct Course {
         Course(std::string row);
         SemesterClass semesterClass;
@@ -14,12 +15,8 @@ struct Course {
         std::string getNextItemInLine(std::string& line);
         double getGPA() const;
         double getNumStudents() const;
-        bool operator>(const Course &other) const {
-            return this->semesterClass > other.semesterClass;
-        }
-        bool operator<(const Course &other) const {
-            return this->semesterClass < other.semesterClass;
-        }
+        bool operator>(const Course &other) const;
+        bool operator<(const Course &other) const;
 
 };
 

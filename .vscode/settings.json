@@ -32,6 +32,7 @@
         "functional": "cpp",
         "system_error": "cpp",
         "thread": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "deque": "cpp"
     }
 }
