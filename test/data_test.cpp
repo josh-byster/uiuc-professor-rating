@@ -96,6 +96,15 @@ TEST_CASE("Check that for every course, every professor falls in the rank"){
     }
 }
 
+TEST_CASE("Test that the ranks are correctly ordered"){
+    for(const std::pair<SemesterClass,std::vector<Course>>& classPair : testFrame.getSemesterClassMap()){
+        std::vector<std::pair<std::string,double>> rankings = testFrame.getInstructorRanksForSemesterClass(classPair.first);
+        for(int i = 1; i < rankings.size(); i++){
+            REQUIRE(rankings[i-1].second >= rankings[i].second);
+        }
+    }
+}
+
 TEST_CASE("Check that instructor course map is correct"){
     // Note that even though this is a triple for loop, it's still O(n) on
     // the number of lines in the CSV file
@@ -129,7 +138,6 @@ TEST_CASE("Test GPA excluding instructor is correct"){
 /**
  * The following tests are extremely important, as not having a strict-ordering
  * relation defined will cause errors in comptuation.
- * 
  */
 TEST_CASE("Test SemesterClass ordering #1"){
     SemesterClass first(2016,"Fall","ANSC",250);
