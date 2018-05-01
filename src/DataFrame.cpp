@@ -4,10 +4,10 @@
  * Constructs a DataFrame given a CSV file
  * @param filename  the path to the CSV file
  */
-DataFrame::DataFrame(std::string filepath){
+DataFrame::DataFrame(std::string filepath) {
     CSVReader reader(filepath);
     std::vector<Course> courseData = reader.getCourseData();
-    for(auto course : courseData){
+    for (auto course : courseData) {
         semesterClassMap[course.semesterClass].push_back(course);
         instructorCourseMap[course.instructorName].push_back(course);
         instructorNames.insert(course.instructorName);
@@ -21,10 +21,11 @@ DataFrame::DataFrame(std::string filepath){
  * 
  * @param instructorName the exactname of the instructor to query
  */
-std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInstructor(std::string instructorName) const{
-    std::map<SemesterClass,std::vector<Course>> semesterClassMap;
+std::map<SemesterClass, std::vector<Course>>
+DataFrame::getSemesterClassMapByInstructor(std::string instructorName) const {
+    std::map<SemesterClass, std::vector<Course>> semesterClassMap;
     std::vector<Course> courseList = instructorCourseMap.at(instructorName);
-    for(Course course : courseList){
+    for (Course course : courseList) {
         semesterClassMap[course.semesterClass].push_back(course);
     }
     return semesterClassMap;
@@ -36,21 +37,21 @@ std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInst
  * @param instructorName the search query entered by the user (lowercase).
  * @param limit   the max amount of results that should be returned to be displayed.
  */
-std::vector<std::string> DataFrame::getInstructorMatchesByName(std::string instructorName, size_t limit) const{
+std::vector<std::string> DataFrame::getInstructorMatchesByName(std::string instructorName, size_t limit) const {
     std::vector<std::string> matches;
-    if(limit == 0){
+    if (limit == 0) {
         return matches;
     }
-    for(std::string instructor : instructorNames){
+    for (std::string instructor : instructorNames) {
         // construct a string full of 'x' placeholders, which we will replace
         // with the lowercase version of the instructor name
-        std::string instructorLowercase(instructor.size(),'x');
-        std::transform(instructor.begin(),instructor.end(),instructorLowercase.begin(),::tolower);
-        
-        if(instructorLowercase.find(instructorName) != std::string::npos){
+        std::string instructorLowercase(instructor.size(), 'x');
+        std::transform(instructor.begin(), instructor.end(), instructorLowercase.begin(), ::tolower);
+
+        if (instructorLowercase.find(instructorName) != std::string::npos) {
             matches.push_back(instructor);
             // if we hit the limit, return the vector
-            if(matches.size() == limit){
+            if (matches.size() == limit) {
                 return matches;
             }
         }
@@ -65,7 +66,7 @@ std::vector<std::string> DataFrame::getInstructorMatchesByName(std::string instr
  * 
  * @param semesterClass the SemesterClass object that we are getting the GPA for.
  */
-double DataFrame::getSemesterClassGPA(SemesterClass semesterClass) const{
+double DataFrame::getSemesterClassGPA(SemesterClass semesterClass) const {
     return getGPAByCourseVector(semesterClassMap.at(semesterClass));
 }
 
@@ -79,8 +80,8 @@ double DataFrame::getSemesterClassGPA(SemesterClass semesterClass) const{
  */
 double DataFrame::getGPAExcludingInstructor(SemesterClass semesterClass, std::string excludedInstructor) const {
     std::vector<Course> courseList;
-    for(Course course : semesterClassMap.at(semesterClass)){
-        if(course.instructorName != excludedInstructor){
+    for (Course course : semesterClassMap.at(semesterClass)) {
+        if (course.instructorName != excludedInstructor) {
             courseList.push_back(course);
         }
     }
@@ -93,27 +94,34 @@ double DataFrame::getGPAExcludingInstructor(SemesterClass semesterClass, std::st
  * 
  * @param semesterClass the specific semesterClass object
  */
-std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemesterClass(SemesterClass semesterClass) const {
-    std::map<std::string,std::vector<Course>> currentInstructorCourseMap;
-    
-    for(Course course : semesterClassMap.at(semesterClass)){
+std::vector<std::pair<std::string, double>>
+DataFrame::getInstructorRanksForSemesterClass(SemesterClass semesterClass) const {
+    std::map<std::string, std::vector<Course>> currentInstructorCourseMap;
+
+    for (Course course : semesterClassMap.at(semesterClass)) {
         currentInstructorCourseMap[course.instructorName].push_back(course);
     }
 
     // construct a map from instructors to their GPA for the specific SemesterClass
-    std::map<std::string,double> instructorGPAMap;
-    for(std::pair<std::string,std::vector<Course>> instructorCourseListPair : currentInstructorCourseMap){
+    std::map<std::string, double> instructorGPAMap;
+    std::cout << "SEMESTERCLASS " << semesterClass.year << semesterClass.term << semesterClass.courseNumber
+              << std::endl;
+    for (std::pair<std::string, std::vector<Course>> instructorCourseListPair : currentInstructorCourseMap) {
         instructorGPAMap[instructorCourseListPair.first] = getGPAByCourseVector(instructorCourseListPair.second);
+        std::cout << instructorCourseListPair.first << ": " << instructorGPAMap[instructorCourseListPair.first]
+                  << std::endl;
     }
-
+    std::cout << "SEMESTER CLASS GPA: " << getSemesterClassGPA(semesterClass) << std::endl;
+    std::cout << "GPA: EXCLUDING INSTRUCTOR" << getGPAExcludingInstructor(semesterClass, "Kutzarova-Ford, Denka N")
+              << std::endl;
     // construct a vector that contains the values of the above map but sorted by GPA
-    std::vector<std::pair<std::string,double>> sortedinstructorGPAList;
-    for(std::pair<std::string,double> instructorGPAPair : instructorGPAMap){
+    std::vector<std::pair<std::string, double>> sortedinstructorGPAList;
+    for (std::pair<std::string, double> instructorGPAPair : instructorGPAMap) {
         sortedinstructorGPAList.push_back(instructorGPAPair);
     }
 
     // sort using the sortByGPA method, which is a custom-defined sorting method
-    std::sort(sortedinstructorGPAList.begin(),sortedinstructorGPAList.end(),sortByGPA);
+    std::sort(sortedinstructorGPAList.begin(), sortedinstructorGPAList.end(), sortByGPA);
     return sortedinstructorGPAList;
 }
 
@@ -125,21 +133,22 @@ std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemes
  * @param semesterClass the specific SemesterClass for which we're querying
  * @param instructorName the name of the instructor to get the rank for
  */
-std::pair<int,int> DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string instructorName) const {
-    std::vector<std::pair<std::string,double>> instructorRankByGPA = getInstructorRanksForSemesterClass(semesterClass);
+std::pair<int, int>
+DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string instructorName) const {
+    std::vector<std::pair<std::string, double>> instructorRankByGPA = getInstructorRanksForSemesterClass(semesterClass);
     int rank = -1;
-    for(unsigned i = 0; i < instructorRankByGPA.size(); i++) {
-        if(instructorRankByGPA[i].first == instructorName){
-            rank = i+1;
+    for (unsigned i = 0; i < instructorRankByGPA.size(); i++) {
+        if (instructorRankByGPA[i].first == instructorName) {
+            rank = i + 1;
         }
     }
-    return std::pair<int,int>(rank,instructorRankByGPA.size());
+    return std::pair<int, int>(rank, instructorRankByGPA.size());
 }
 
 /**
  * Custom strict ordering of pairs to get the GPA in descending order (highest to lowest GPA).
  */
-bool sortByGPA(const std::pair<std::string,double>& a, const std::pair<std::string,double>& b){
+bool sortByGPA(const std::pair<std::string, double> &a, const std::pair<std::string, double> &b) {
     return (a.second > b.second);
 }
 
@@ -149,14 +158,14 @@ bool sortByGPA(const std::pair<std::string,double>& a, const std::pair<std::stri
  * 
  * @param gpaVector the vector of courses to compute the GPA from
  */
-double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const{
+double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const {
     double gpaStudents = 0;
     int totalStudents = 0;
-    for(const Course& course : gpaVector){
-        gpaStudents+=course.getGPA()*course.getNumStudents();
-        totalStudents+=course.getNumStudents();
+    for (const Course &course : gpaVector) {
+        gpaStudents += course.getGPA() * course.getNumStudents();
+        totalStudents += course.getNumStudents();
     }
-    if(totalStudents == 0){
+    if (totalStudents == 0) {
         return 0;
     }
     return gpaStudents / totalStudents;
@@ -167,7 +176,7 @@ double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const{
  * Returns an unordered set of instructors by reference, since it
  * is only used in testing. 
  */
-const std::unordered_set<std::string>& DataFrame::getAllInstructorNames() const{
+const std::unordered_set<std::string> &DataFrame::getAllInstructorNames() const {
     return instructorNames;
 }
 
@@ -175,7 +184,7 @@ const std::unordered_set<std::string>& DataFrame::getAllInstructorNames() const{
  * Returns the map from instructors to all the courses they taught.
  * Returns a constant refrerence since it's used only in testing.
  */
-const std::unordered_map<std::string,std::vector<Course>>& DataFrame::getInstructorCourseMap() const{
+const std::unordered_map<std::string, std::vector<Course>> &DataFrame::getInstructorCourseMap() const {
     return instructorCourseMap;
 }
 
@@ -184,6 +193,6 @@ const std::unordered_map<std::string,std::vector<Course>>& DataFrame::getInstruc
  * that class that semester.
  * Returns a constant reference because it's only used in testing.
  */
-const std::unordered_map<SemesterClass,std::vector<Course>>& DataFrame::getSemesterClassMap() const{
+const std::unordered_map<SemesterClass, std::vector<Course>> &DataFrame::getSemesterClassMap() const {
     return semesterClassMap;
 }

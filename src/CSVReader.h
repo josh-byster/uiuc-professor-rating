@@ -9,11 +9,12 @@
 #include "Course.h"
 
 class CSVReader {
-    public:
-        CSVReader(std::string filename) : filename(filename) { };
-        std::vector<Course> getCourseData();
-    private:
-        std::string filename;  
+public:
+    CSVReader(std::string filename) : filename(filename) {};
+    std::vector<Course> getCourseData();
+
+private:
+    std::string filename;
 };
 
 #endif
