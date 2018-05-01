@@ -24,7 +24,7 @@ CXXFLAG2 = -std=c++11 -c -g -O0 -Wall -Wextra
 LD2 = clang++
 LDFLAG2 = -std=c++11
 
-testing: data_test.o test_main.o dataframe.o
+testing: data_test.o test_main.o DataFrame.o CSVReader.o Course.o SemesterClass.o
 	$(LD2) $^ $(LDFLAG2) -o $@
 
 
@@ -34,7 +34,16 @@ data_test.o: test/data_test.cpp src/*.h
 test_main.o: test/test_main.cpp src/*.h
 	$(CXX2) $< $(CXXFLAG2)
 
-dataframe.o: src/DataFrame.cpp src/CSVReader.cpp src/Course.cpp src/SemesterClass.cpp
-	$(CXX2) $^ $(CXXFLAG2)
+DataFrame.o: src/DataFrame.cpp
+	$(CXX2) $^ $(CXXFLAG2) -o DataFrame.o
 
+CSVReader.o: src/CSVReader.cpp
+	$(CXX2) $^ $(CXXFLAG2) -o CSVReader.o
 
+Course.o: src/Course.cpp
+	$(CXX2) $^ $(CXXFLAG2) -o Course.o
+
+SemesterClass.o: src/SemesterClass.cpp
+	$(CXX2) $^ $(CXXFLAG2) -o SemesterClass.o
+testclean: 
+	rm -rf *.o

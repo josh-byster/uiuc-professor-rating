@@ -60,3 +60,11 @@ TEST_CASE("Spot check GPA by instructor"){
    }
    
 }
+
+TEST_CASE("Check that the instructor search results are limited"){
+    for(int i = 0; i < 10; i++){
+        std::vector<std::string> matches = testFrame.getProfessorMatchesByName("smith", i);
+        REQUIRE(matches.size() == i);
+    }
+    
+}

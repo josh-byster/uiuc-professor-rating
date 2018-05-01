@@ -38,7 +38,9 @@ std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInst
  */
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{
     std::vector<std::string> matches;
-    
+    if(limit == 0){
+        return matches;
+    }
     for(std::string instructor : instructorNames){
         // construct a string full of 'x' placeholders, which we will replace
         // with the lowercase version of the instructor name
