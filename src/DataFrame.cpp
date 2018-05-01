@@ -16,14 +16,14 @@ DataFrame::DataFrame(std::string filepath){
 
 /**
  * Get an ordered map from SemesterClass objects to courses filtered by instructor.
- * This gets a map of every course that this specific professor has taught along with the 
- * values of the map being the courses taught by that professor specifically.
+ * This gets a map of every course that this specific instructor has taught along with the 
+ * values of the map being the courses taught by that instructor specifically.
  * 
- * @param professorName the exactname of the professor to query
+ * @param instructorName the exactname of the instructor to query
  */
-std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInstructor(std::string professorName) const{
+std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInstructor(std::string instructorName) const{
     std::map<SemesterClass,std::vector<Course>> semesterClassMap;
-    std::vector<Course> courseList = instructorCourseMap.at(professorName);
+    std::vector<Course> courseList = instructorCourseMap.at(instructorName);
     for(Course course : courseList){
         semesterClassMap[course.semesterClass].push_back(course);
     }
@@ -31,12 +31,12 @@ std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInst
 }
 
 /**
- * Gets a list of professors by search query.
+ * Gets a list of instructors by search query.
  * 
- * @param professorName the search query entered by the user (lowercase).
+ * @param instructorName the search query entered by the user (lowercase).
  * @param limit   the max amount of results that should be returned to be displayed.
  */
-std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{
+std::vector<std::string> DataFrame::getInstructorMatchesByName(std::string instructorName, size_t limit) const{
     std::vector<std::string> matches;
     if(limit == 0){
         return matches;
@@ -47,7 +47,7 @@ std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string profes
         std::string instructorLowercase(instructor.size(),'x');
         std::transform(instructor.begin(),instructor.end(),instructorLowercase.begin(),::tolower);
         
-        if(instructorLowercase.find(professorName) != std::string::npos){
+        if(instructorLowercase.find(instructorName) != std::string::npos){
             matches.push_back(instructor);
             // if we hit the limit, return the vector
             if(matches.size() == limit){
@@ -107,29 +107,29 @@ std::vector<std::pair<std::string,double>> DataFrame::getInstructorRanksForSemes
     }
 
     // construct a vector that contains the values of the above map but sorted by GPA
-    std::vector<std::pair<std::string,double>> sortedProfessorGPAList;
+    std::vector<std::pair<std::string,double>> sortedinstructorGPAList;
     for(std::pair<std::string,double> instructorGPAPair : instructorGPAMap){
-        sortedProfessorGPAList.push_back(instructorGPAPair);
+        sortedinstructorGPAList.push_back(instructorGPAPair);
     }
 
     // sort using the sortByGPA method, which is a custom-defined sorting method
-    std::sort(sortedProfessorGPAList.begin(),sortedProfessorGPAList.end(),sortByGPA);
-    return sortedProfessorGPAList;
+    std::sort(sortedinstructorGPAList.begin(),sortedinstructorGPAList.end(),sortByGPA);
+    return sortedinstructorGPAList;
 }
 
 /**
  * Get the rank of an instructor relative to n instructors
  * for the specific SemesterClass (1 = easiest, n = hardest).
- * Returns -1 if the professor isn't found.
+ * Returns -1 if the instructor isn't found.
  * 
  * @param semesterClass the specific SemesterClass for which we're querying
- * @param professorName the name of the professor to get the rank for
+ * @param instructorName the name of the instructor to get the rank for
  */
-std::pair<int,int> DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string professorName) const {
+std::pair<int,int> DataFrame::getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string instructorName) const {
     std::vector<std::pair<std::string,double>> instructorRankByGPA = getInstructorRanksForSemesterClass(semesterClass);
     int rank = -1;
     for(unsigned i = 0; i < instructorRankByGPA.size(); i++) {
-        if(instructorRankByGPA[i].first == professorName){
+        if(instructorRankByGPA[i].first == instructorName){
             rank = i+1;
         }
     }
@@ -172,7 +172,7 @@ const std::unordered_set<std::string>& DataFrame::getAllInstructorNames() const{
 }
 
 /**
- * Returns the map from professors to all the courses they taught.
+ * Returns the map from instructors to all the courses they taught.
  * Returns a constant refrerence since it's used only in testing.
  */
 const std::unordered_map<std::string,std::vector<Course>>& DataFrame::getInstructorCourseMap() const{
@@ -180,7 +180,7 @@ const std::unordered_map<std::string,std::vector<Course>>& DataFrame::getInstruc
 }
 
 /**
- * Returns the map from SemesterClasses to all the courses/professors that taught
+ * Returns the map from SemesterClasses to all the courses/instructors that taught
  * that class that semester.
  * Returns a constant reference because it's only used in testing.
  */

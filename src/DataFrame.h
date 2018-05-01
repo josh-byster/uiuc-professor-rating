@@ -14,10 +14,10 @@ class DataFrame {
       DataFrame() {}
 
       //Instructor-specific data
-      std::map<SemesterClass,std::vector<Course>> getSemesterClassMapByInstructor(std::string professorName) const;  
-      std::vector<std::string> getProfessorMatchesByName(std::string professorName, size_t limit) const;
+      std::map<SemesterClass,std::vector<Course>> getSemesterClassMapByInstructor(std::string instructorName) const;  
+      std::vector<std::string> getInstructorMatchesByName(std::string instructorName, size_t limit) const;
       std::vector<std::pair<std::string,double>> getInstructorRanksForSemesterClass(SemesterClass semesterClass) const;
-      std::pair<int,int> getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string professorName) const;
+      std::pair<int,int> getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string instructorName) const;
       const std::unordered_set<std::string>& getAllInstructorNames() const;
       const std::unordered_map<std::string,std::vector<Course>>& getInstructorCourseMap() const;
 

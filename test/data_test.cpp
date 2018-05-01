@@ -42,7 +42,7 @@ TEST_CASE("Spot check GPA by instructor"){
 
 //---------------------------SECTION--------------------------
 //Testing for consistency in dataframe setup
-TEST_CASE("Test that every professor has some valid name"){
+TEST_CASE("Test that every instructor has some valid name"){
     for(const std::string& name : testFrame.getAllInstructorNames()){
         REQUIRE(name.find(", ") != std::string::npos);
     }
@@ -86,14 +86,14 @@ TEST_CASE("Check that instructor course map is correct"){
 //Testing search functionality
 TEST_CASE("Check that the instructor search results are limited correctly"){
     for(int i = 0; i < 10; i++){
-        std::vector<std::string> matches = testFrame.getProfessorMatchesByName("smith", i);
+        std::vector<std::string> matches = testFrame.getInstructorMatchesByName("smith", i);
         REQUIRE(matches.size() == i);
     }
 }
 
 TEST_CASE("Check that the instructor search results are actually contain the string"){
     for(int i = 1; i < 10; i++){
-        std::vector<std::string> matches = testFrame.getProfessorMatchesByName("smith", i);
+        std::vector<std::string> matches = testFrame.getInstructorMatchesByName("smith", i);
         for(const std::string& match : matches){
             // Checking everything but first letter since capitalization may be different
             REQUIRE(match.find("mith") != std::string::npos);
@@ -110,7 +110,7 @@ TEST_CASE("Check that for one instructor for a course, rank is correct"){
     REQUIRE(rank.second == 1);
 }
 
-TEST_CASE("Check that for every course, every professor falls in the rank"){
+TEST_CASE("Check that for every course, every instructor falls in the rank"){
     for(const std::pair<SemesterClass,std::vector<Course>>& classPair : testFrame.getSemesterClassMap()){
         for(const Course& course : classPair.second){
             std::pair<int,int> rank = testFrame.getInstructorRankForSemesterClass(classPair.first,course.instructorName);
