@@ -17,3 +17,5 @@ You must first have OpenFrameworks downloaded on your computer. If you don't hav
 To run the project, run `make` after `cd`ing into the directory, followed by `make RunRelease`.
 
 To run the test suite, run `make testing` and then `./testing`.
+
+Once the project launches, you'll see in the upper-left corner a textbox to enter the name of the professor (last name, first name). You do not need to enter the full name before hitting enter/return. Then the results along with the legend is on the right-hand side.
