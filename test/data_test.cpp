@@ -114,3 +114,77 @@ TEST_CASE("Edge case when calculating GPA excluding instructor & no other instru
     SemesterClass discreteStructures(2015,"Fall","CS",173);
     REQUIRE(0 == testFrame.getGPAExcludingInstructor(discreteStructures,"Fleck, Margaret M"));
 }
+
+TEST_CASE("Test GPA excluding instructor is correct"){
+    const std::unordered_map<SemesterClass,std::vector<Course>>& semesterClassMap = testFrame.getSemesterClassMap();
+    SemesterClass financialPlanning(2017,"Fall","ACE",240);
+    double gpaExcludingCraig = testFrame.getGPAExcludingInstructor(financialPlanning,"Lemoine, Craig");
+    double otherInstructorGPA = semesterClassMap.at(financialPlanning)[0].getGPA();
+    if(semesterClassMap.at(financialPlanning)[0].instructorName == "Lemoine, Craig"){
+        otherInstructorGPA = semesterClassMap.at(financialPlanning)[1].getGPA();
+    }
+    REQUIRE(isWithinTolerance(gpaExcludingCraig,otherInstructorGPA));
+}
+
+/**
+ * The following tests are extremely important, as not having a strict-ordering
+ * relation defined will cause errors in comptuation.
+ * 
+ */
+TEST_CASE("Test SemesterClass ordering #1"){
+    SemesterClass first(2016,"Fall","ANSC",250);
+    SemesterClass second(2017,"Fall","ANSC",250);
+    REQUIRE(first < second);
+}
+
+TEST_CASE("Test SemesterClass ordering #2"){
+    SemesterClass first(2017,"Spring","ANSC",250);
+    SemesterClass second(2017,"Fall","ANSC",250);
+    REQUIRE(first < second);
+}
+
+TEST_CASE("Test SemesterClass ordering #3"){
+    SemesterClass first(2017,"Fall","ANSC",250);
+    SemesterClass second(2017,"Fall","ANSC",251);
+    REQUIRE(first < second);
+}
+
+TEST_CASE("Test SemesterClass ordering #4"){
+    SemesterClass first(2017,"Fall","ANSC",250);
+    SemesterClass second(2017,"Fall","BTW",250);
+    REQUIRE(first < second);
+}
+
+TEST_CASE("GPA is within a correct range for all courses"){
+    for(const std::pair<SemesterClass,std::vector<Course>>& classPair : testFrame.getSemesterClassMap()){
+        for(const Course& course : classPair.second){
+            REQUIRE(course.getGPA() > 0);
+            REQUIRE(course.getGPA() <= 4.0);
+        }
+    }
+}
+
+TEST_CASE("Test SemesterClass equality"){
+    int assertions = 0;
+    int limit = 30000;
+    for(const std::pair<SemesterClass,std::vector<Course>>& firstClass : testFrame.getSemesterClassMap()){
+        for(const std::pair<SemesterClass,std::vector<Course>>& secondClass : testFrame.getSemesterClassMap()){
+            // Checking if-and-only-if conditions.
+            // !(a < b) && !(b < a) iff a == b
+            // is the check for the map's strict-ordering 
+            if(firstClass.first == secondClass.first){
+                REQUIRE(!(firstClass.first < secondClass.first));
+                REQUIRE(!(secondClass.first < firstClass.first));
+                assertions+=2;
+            } else {
+                bool isDifferent = !(firstClass.first < secondClass.first) 
+                || !(secondClass.first < firstClass.first);
+                REQUIRE(isDifferent);
+                assertions+=1;
+            }
+        }
+        if(assertions >= limit){
+            break;
+        }
+    }
+}
