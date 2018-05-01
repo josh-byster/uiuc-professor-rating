@@ -104,16 +104,11 @@ DataFrame::getInstructorRanksForSemesterClass(SemesterClass semesterClass) const
 
     // construct a map from instructors to their GPA for the specific SemesterClass
     std::map<std::string, double> instructorGPAMap;
-    std::cout << "SEMESTERCLASS " << semesterClass.year << semesterClass.term << semesterClass.courseNumber
-              << std::endl;
+
     for (std::pair<std::string, std::vector<Course>> instructorCourseListPair : currentInstructorCourseMap) {
         instructorGPAMap[instructorCourseListPair.first] = getGPAByCourseVector(instructorCourseListPair.second);
-        std::cout << instructorCourseListPair.first << ": " << instructorGPAMap[instructorCourseListPair.first]
-                  << std::endl;
     }
-    std::cout << "SEMESTER CLASS GPA: " << getSemesterClassGPA(semesterClass) << std::endl;
-    std::cout << "GPA: EXCLUDING INSTRUCTOR" << getGPAExcludingInstructor(semesterClass, "Kutzarova-Ford, Denka N")
-              << std::endl;
+
     // construct a vector that contains the values of the above map but sorted by GPA
     std::vector<std::pair<std::string, double>> sortedinstructorGPAList;
     for (std::pair<std::string, double> instructorGPAPair : instructorGPAMap) {
