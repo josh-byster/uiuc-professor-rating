@@ -61,10 +61,56 @@ TEST_CASE("Spot check GPA by instructor"){
    
 }
 
-TEST_CASE("Check that the instructor search results are limited"){
+TEST_CASE("Check that the instructor search results are limited correctly"){
     for(int i = 0; i < 10; i++){
         std::vector<std::string> matches = testFrame.getProfessorMatchesByName("smith", i);
         REQUIRE(matches.size() == i);
     }
-    
+}
+
+TEST_CASE("Check that the instructor search results are actually contain the string"){
+    for(int i = 1; i < 10; i++){
+        std::vector<std::string> matches = testFrame.getProfessorMatchesByName("smith", i);
+        for(const std::string& match : matches){
+            // Checking everything but first letter since capitalization may be different
+            REQUIRE(match.find("mith") != std::string::npos);
+        }
+    }
+}
+
+TEST_CASE("Check that for one instructor for a course, rank is correct"){
+    SemesterClass discreteStructures(2017,"Fall","CS",173);
+    std::pair<int,int> rank = testFrame.getInstructorRankForSemesterClass(discreteStructures,"Fleck, Margaret M");
+    REQUIRE(rank.first == 1);
+    REQUIRE(rank.second == 1);
+}
+
+TEST_CASE("Check that for every course, every professor falls in the rank"){
+    for(const std::pair<SemesterClass,std::vector<Course>>& classPair : testFrame.getSemesterClassMap()){
+        for(const Course& course : classPair.second){
+            std::pair<int,int> rank = testFrame.getInstructorRankForSemesterClass(classPair.first,course.instructorName);
+            REQUIRE(rank.first > 0);
+            REQUIRE(rank.second <= classPair.second.size());
+        }
+
+    }
+}
+
+TEST_CASE("Check that instructor course map is correct"){
+    // Note that even though this is a triple for loop, it's still O(n) on
+    // the number of lines in the CSV file
+    for(const std::string& name : testFrame.getAllInstructorNames()){
+        for(const std::pair<SemesterClass,std::vector<Course>>& classPair 
+        : testFrame.getSemesterClassMapByInstructor(name)){
+            for(const Course& course : classPair.second){
+                REQUIRE(name == course.instructorName);
+                REQUIRE(classPair.first == course.semesterClass);
+            }
+        }
+    }
+}
+
+TEST_CASE("Edge case when calculating GPA excluding instructor & no other instructors are teaching"){
+    SemesterClass discreteStructures(2015,"Fall","CS",173);
+    REQUIRE(0 == testFrame.getGPAExcludingInstructor(discreteStructures,"Fleck, Margaret M"));
 }

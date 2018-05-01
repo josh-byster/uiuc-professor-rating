@@ -33,7 +33,7 @@ std::map<SemesterClass,std::vector<Course>> DataFrame::getSemesterClassMapByInst
 /**
  * Gets a list of professors by search query.
  * 
- * @param professorName the search query entered by the user.
+ * @param professorName the search query entered by the user (lowercase).
  * @param limit   the max amount of results that should be returned to be displayed.
  */
 std::vector<std::string> DataFrame::getProfessorMatchesByName(std::string professorName, size_t limit) const{
