@@ -127,7 +127,7 @@ void ofApp::draw() {
     ofColor colorTwo(255, 255, 255);
 
     ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
-    ofDrawBitmapString("Josh's instructor Rating App", ofGetWidth() / 2 - 120, ofGetHeight() - 50);
+    ofDrawBitmapString("Josh's Instructor Rating App", ofGetWidth() / 2 - 120, ofGetHeight() - 50);
 }
 
 //--------------------------------------------------------------

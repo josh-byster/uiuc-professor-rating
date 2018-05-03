@@ -149,9 +149,9 @@ bool sortByGPA(const std::pair<std::string, double> &a, const std::pair<std::str
 
 /**
  * Get the weighted GPA from a course vector 
- * (sections with higher amounts of students get a higher respectiveweight).
+ * (sections with higher amounts of students get a higher respective weight).
  * 
- * @param gpaVector the vector of courses to compute the GPA from
+ * @param gpaVector the vector of courses to compute the GPA from.
  */
 double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const {
     double gpaStudents = 0;
@@ -171,7 +171,7 @@ double DataFrame::getGPAByCourseVector(std::vector<Course> gpaVector) const {
  * Returns an unordered set of instructors by reference, since it
  * is only used in testing. 
  */
-const std::unordered_set<std::string> &DataFrame::getAllInstructorNames() const {
+const std::unordered_set<std::string>& DataFrame::getAllInstructorNames() const {
     return instructorNames;
 }
 
@@ -179,7 +179,7 @@ const std::unordered_set<std::string> &DataFrame::getAllInstructorNames() const 
  * Returns the map from instructors to all the courses they taught.
  * Returns a constant refrerence since it's used only in testing.
  */
-const std::unordered_map<std::string, std::vector<Course>> &DataFrame::getInstructorCourseMap() const {
+const std::unordered_map<std::string, std::vector<Course>>& DataFrame::getInstructorCourseMap() const {
     return instructorCourseMap;
 }
 
@@ -188,6 +188,6 @@ const std::unordered_map<std::string, std::vector<Course>> &DataFrame::getInstru
  * that class that semester.
  * Returns a constant reference because it's only used in testing.
  */
-const std::unordered_map<SemesterClass, std::vector<Course>> &DataFrame::getSemesterClassMap() const {
+const std::unordered_map<SemesterClass, std::vector<Course>>& DataFrame::getSemesterClassMap() const {
     return semesterClassMap;
 }

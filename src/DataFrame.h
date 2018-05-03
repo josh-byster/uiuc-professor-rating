@@ -25,9 +25,9 @@ public:
     std::pair<int, int>
     getInstructorRankForSemesterClass(SemesterClass semesterClass, std::string instructorName) const;
 
-    const std::unordered_set<std::string> &getAllInstructorNames() const;
+    const std::unordered_set<std::string>& getAllInstructorNames() const;
 
-    const std::unordered_map<std::string, std::vector<Course>> &getInstructorCourseMap() const;
+    const std::unordered_map<std::string, std::vector<Course>>& getInstructorCourseMap() const;
 
     //GPA computation methods
     double getSemesterClassGPA(SemesterClass semesterClass) const;
@@ -36,7 +36,7 @@ public:
 
     double getGPAExcludingInstructor(SemesterClass semesterClass, std::string excludedInstructor) const;
 
-    const std::unordered_map<SemesterClass, std::vector<Course>> &getSemesterClassMap() const;
+    const std::unordered_map<SemesterClass, std::vector<Course>>& getSemesterClassMap() const;
 
 private:
     //Map from an instructor to all the courses they taught
